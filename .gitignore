@@ -1,0 +1,13 @@
+#ignore compilate (files without extension).
+*
+!/**/
+!*.*
+
+#ignore local generate files
+*.json
+*.csv
+
+#ignore directory.
+/.vscode/
+/__pycache__/
+/models/__pycache__/
