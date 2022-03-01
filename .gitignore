@@ -8,6 +8,7 @@
 *.csv
 
 #ignore directory.
+/.idea/
 /.vscode/
 /__pycache__/
 /models/__pycache__/
