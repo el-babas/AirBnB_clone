@@ -12,13 +12,24 @@ class BaseModel:
             for other classes.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ Construct (replace):
                 BaseModel object.
+            Args:
+                *args (tuple): Non-keyworded variable length argument list.
+                **kwargs (dict): Keyworded variable length of arguments.
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if len(kwargs) > 0:
+            for key, value in kwargs.items():
+                if key in ["created_at", "updated_at"]:
+                    # info!: strptime is short for "parse time"
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                if key != '__class__':
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ Method (replace):
