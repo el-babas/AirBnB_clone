@@ -1,7 +1,7 @@
 #ignore compilate (files without extension).
-*
-!/**/
-!*.*
+##*
+##!/**/
+##!*.*
 
 #ignore local generate files
 *.json
