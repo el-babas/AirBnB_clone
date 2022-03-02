@@ -16,13 +16,13 @@ class BaseModel:
         """ Construct (replace):
                 BaseModel object.
             Args:
-                *args (tuple): Non-keyworded variable length argument list.
-                **kwargs (dict): Keyworded variable length of arguments.
+                *args (tuple): Non-keyword variable length argument list.
+                **kwargs (dict): Keyword variable length of arguments.
         """
         if len(kwargs) > 0:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
-                    # info!: strptime is short for "parse time"
+                    # info!: parse time (string to datetime)
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != '__class__':
                     setattr(self, key, value)
