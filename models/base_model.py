@@ -16,11 +16,11 @@ class BaseModel:
 
     Attributes:
         id (str):
-            <ia> ID unique of object.
+            ID unique of object.
         created_at (datetime):
-            <ia> Datetime when an instance is created.
+            Datetime when an instance is created.
         updated_at (datetime):
-            <ia> Datetime when an instance is created, and it will be updated.
+            Datetime when an instance is created, and it will be updated.
     """
 
     def __init__(self, *args, **kwargs):

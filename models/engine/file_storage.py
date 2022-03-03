@@ -5,6 +5,7 @@ Class
 """
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -14,10 +15,10 @@ class FileStorage:
         and deserializes JSON file to instances
 
     Attributes:
-        __file_path (str):
-            <ca> Path to the JSON file.
-        __objects (dict):
-            <ca> Store all objects by <class name>.id.
+        FileStorage.__file_path (str):
+            Path to the JSON file.
+        FileStorage.__objects (dict):
+            Store all objects by <class name>.id.
     """
     __file_path = "file.json"
     __objects = {}
@@ -56,6 +57,7 @@ class FileStorage:
         if self.__objects is not None and self.__objects:
             for key, obj in self.__objects.items():
                 objs_dict[key] = obj.to_dict()
+                # note! : use mode W is correct or A?
                 with open(self.__file_path, mode="w") as file_json:
                     json.dump(objs_dict, file_json)
 
@@ -65,11 +67,14 @@ class FileStorage:
             Deserializes the JSON file to __objects
             (only if the JSON file (__file_path) exists).
         """
-        class_dict = {"BaseMode": BaseModel}
+        class_dict = {
+            "BaseMode": BaseModel,
+            "User": User
+        }
         try:
             with open(self.__file_path, mode="r") as file_json:
                 # info!: values contain of dictionary attributes of the object
-                for key, values in (json.load(file_json)).items:
+                for key, values in json.load(file_json).items():
                     class_name = values["__class__"]
                     self.new(class_dict[class_name](**values))
         except BaseException:
