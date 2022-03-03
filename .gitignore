@@ -12,4 +12,5 @@
 /.vscode/
 /__pycache__/
 /models/__pycache__/
+/models/engine/__pycache__/
 /test/__pycache__/
