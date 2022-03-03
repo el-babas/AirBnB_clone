@@ -4,6 +4,7 @@ Class
     a) FileStorage.
 """
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -64,3 +65,12 @@ class FileStorage:
             Deserializes the JSON file to __objects
             (only if the JSON file (__file_path) exists).
         """
+        class_dict = {"BaseMode": BaseModel}
+        try:
+            with open(self.__file_path, mode="r") as file_json:
+                # info!: values contain of dictionary attributes of the object
+                for key, values in (json.load(file_json)).items:
+                    class_name = values["__class__"]
+                    self.new(class_dict[class_name](**values))
+        except BaseException:
+            pass
