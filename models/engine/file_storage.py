@@ -63,8 +63,9 @@ class FileStorage:
             for key, obj in self.__objects.items():
                 objs_dict[key] = obj.to_dict()
                 # note! : use mode W is correct or A?
+                # note: changing dump to dumps.
                 with open(self.__file_path, mode="w") as file_json:
-                    json.dump(objs_dict, file_json)
+                    file_json.write(json.dumps(objs_dict))
 
     def reload(self):
         """
@@ -73,7 +74,7 @@ class FileStorage:
             (only if the JSON file (__file_path) exists).
         """
         class_dict = {
-            "BaseMode": BaseModel,
+            "BaseModel": BaseModel,
             "User": User,
             "State": State,
             "City": City,
