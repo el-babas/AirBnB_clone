@@ -37,9 +37,8 @@ class BaseModel:
         if len(kwargs) > 0:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
-                    # info!: parse time (string to datetime)
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                if key != '__class__':
+                if key != "__class__":
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
@@ -55,10 +54,8 @@ class BaseModel:
         Return:
             String in  format '[<class name>] (<self.id>) <self.__dict__>'.
         """
-        class_str = ""
-        class_str += "[" + type(self).__name__ + "] "
-        class_str += "(" + self.id + ") "
-        class_str += str(self.__dict__)
+        class_str = "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
         return class_str
 
     def save(self):
