@@ -77,11 +77,8 @@ class BaseModel:
         Return:
             A dictionary containing all keys/values of __dict__ the instance.
         """
-        class_dict = dict()
-        for key, value in self.__dict__.items():
-            if key in ["created_at", "updated_at"]:
-                class_dict[key] = value.isoformat()
-            elif value:
-                class_dict[key] = value
-        class_dict["__class__"] = self.__class__.__name__
+        class_dict = self.__dict__.copy()
+        class_dict['__class__'] = self.__class__.__name__
+        class_dict['created_at'] = class_dict['created_at'].isoformat()
+        class_dict['updated_at'] = class_dict['updated_at'].isoformat()
         return class_dict
