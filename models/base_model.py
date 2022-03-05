@@ -56,9 +56,8 @@ class BaseModel:
             String in  format '[<class name>] (<self.id>) <self.__dict__>'.
         """
         class_str = ""
-        class_str += "[" + self.__class__.__name__ + "] "
+        class_str += "[" + self.__name__ + "] "
         class_str += "(" + self.id + ") "
-        # note! : need to implement
         class_str += self.__dict__
         return class_str
 
