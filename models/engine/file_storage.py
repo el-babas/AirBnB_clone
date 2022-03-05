@@ -89,4 +89,4 @@ class FileStorage:
                     class_name = values["__class__"]
                     self.new(class_dict[class_name](**values))
         except BaseException:
-            pass
+            self.__objects = dict()
