@@ -59,7 +59,7 @@ class BaseModel:
         class_str += "[" + self.__class__.__name__ + "] "
         class_str += "(" + self.id + ") "
         # note! : need to implement
-        class_str += str(self.__dict__)
+        class_str += self.__dict__
         return class_str
 
     def save(self):
