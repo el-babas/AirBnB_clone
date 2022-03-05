@@ -24,6 +24,7 @@ class_dict = {
             "Review": Review
         }
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Class:
@@ -31,12 +32,7 @@ class HBNBCommand(cmd.Cmd):
         for other classes.
 
     Attributes:
-        id (str):
-            ID unique of object.
-        created_at (datetime):
-            Datetime when an instance is created.
-        updated_at (datetime):
-            Datetime when an instance is created, and it will be updated.
+                 (Por completar)
     """
     prompt = "(hbnb) "
 
@@ -65,7 +61,7 @@ class HBNBCommand(cmd.Cmd):
             print(new.id)
 
     def do_show(self, args):
-        """ Prints the string representation of an instance based on the class name and id\n"""
+        """Prints the string representation of an instance\n"""
         list_ = args.split()
         if len(list_) == 0:
             print("** class name missing **")
@@ -113,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
             ])
 
     def do_update(self, args):
-        """Updates an instance based on the class name and id by adding or updating attribute \n"""
+        """Updates an instance by adding or updating its attribute \n"""
         list_ = args.split()
         list_key = list_[0] + "." + list_[1]
         dict_ = storage.all()
@@ -133,6 +129,7 @@ class HBNBCommand(cmd.Cmd):
             if list_key in dict_.keys():
                 setattr(dict_[list_key], list_[2], list_[3])
                 storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
