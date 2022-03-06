@@ -1,104 +1,18 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
-Unittests for User.
+Class definition
 """
-import unittest
-import pycodestyle
-import datetime
-import models
 from models.base_model import BaseModel
 from models.user import User
+import unittest
 
 
-class CodeStyleTests(unittest.TestCase):
+class TestModules(unittest.TestCase):
     """
-    Code style test.
+    Class definition
     """
-
-    def testPycodestyle(self):
+    def test_uper(self):
         """
-        Tests cases for pycodestyle.
+        Method definition
         """
-        code_style = pycodestyle.StyleGuide(quiet=True)
-        result = code_style.check_files(["models/user.py"])
-        self.assertEqual(result.total_errors, 0, "User pycodestyle error")
-
-
-class DocumentationTests(unittest.TestCase):
-    """
-    Documentation test.
-    """
-
-    def testDocString(self):
-        """
-        Tests cases for docstring.
-        """
-        self.assertIsNotNone(models.user.__doc__,
-                             "User not docstring")
-        self.assertTrue(len(__doc__) > 0, "User not docstring")
-        self.assertFalse(len(__doc__) < 0, "User not docstring")
-
-
-class UserTests(unittest.TestCase):
-    """
-    User tests.
-    """
-    us = User()
-
-    def testAttributes(self):
-        """
-        Test cases for the attributes.
-        """
-        self.us.email = "email@gmail.com"
-        self.us.password = "password"
-        self.us.first_name = "First Name"
-        self.us.last_name = "Last Name"
-        dict_am = self.us.to_dict()
-
-        self.assertEqual(self.us.email, dict_am["email"])
-        self.assertEqual(self.us.password, dict_am["password"])
-        self.assertEqual(self.us.first_name, dict_am["first_name"])
-        self.assertEqual(self.us.last_name, dict_am["last_name"])
-        self.assertEqual("User", dict_am["__class__"])
-
-    def testInheritance(self):
-        """
-        Test cases verify is subclass of BaseModel
-        """
-        self.assertIsInstance(self.us, BaseModel)
-        self.assertTrue(hasattr(self.us, 'id'))
-        self.assertTrue(hasattr(self.us, 'created_at'))
-        self.assertTrue(hasattr(self.us, 'updated_at'))
-
-    def testTypeAttributes(self):
-        """
-        Test case for validate type for attributes.
-        """
-        self.assertIsInstance(self.us.email, str)
-        self.assertIsInstance(self.us.password, str)
-        self.assertIsInstance(self.us.first_name, str)
-        self.assertIsInstance(self.us.last_name, str)
-        self.assertIsInstance(self.us.id, str)
-        self.assertIsInstance(self.us.created_at, datetime.datetime)
-        self.assertIsInstance(self.us.updated_at, datetime.datetime)
-
-    def testDateUpdate(self):
-        """
-        Test case for validate change update_at.
-        """
-        self.us.first_name = "Update 1"
-        self.us.save()
-        dict_1 = self.us.to_dict()
-
-        self.us.first_name = "Update 2"
-        self.us.save()
-        dict_2 = self.us.to_dict()
-
-        self.assertEqual(dict_1["id"], dict_2["id"])
-        self.assertEqual(dict_1["created_at"], dict_2["created_at"])
-        self.assertNotEqual(dict_1["updated_at"], dict_2["updated_at"])
-        self.assertNotEqual(dict_1["first_name"], dict_2["first_name"])
-
-
-if __name__ == "__main__":
-    unittest.main()
+        self.assertEqual(5, 3)
