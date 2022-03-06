@@ -62,8 +62,8 @@ class FileStorage:
         if self.__objects is not None and self.__objects:
             for key, obj in self.__objects.items():
                 objs_dict[key] = obj.to_dict()
-                # note! : use mode W is correct or A?
-                # note: changing dump to dumps.
+                # note!: Use mode W is correct or A?
+                # note!: changing dump to dumps.
                 with open(self.__file_path, mode="w") as file_json:
                     file_json.write(json.dumps(objs_dict))
 
