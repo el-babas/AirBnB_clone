@@ -32,7 +32,8 @@ class DocumentationTests(unittest.TestCase):
         """
         Tests cases for docstring.
         """
-        self.assertIsNotNone(models.base_model.__doc__, "BaseModel not docstring")
+        self.assertIsNotNone(models.base_model.__doc__,
+                             "BaseModel not docstring")
         self.assertTrue(len(__doc__) > 0, "BaseModel not docstring")
         self.assertFalse(len(__doc__) < 0, "BaseModel not docstring")
 

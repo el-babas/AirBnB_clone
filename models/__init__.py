@@ -12,16 +12,5 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
-cls_dict = {
-    "BaseModel": BaseModel,
-    "User": User,
-    "Place": Place,
-    "State": State,
-    "City": City,
-    "Amenity": Amenity,
-    "Review": Review
-}
-
-
 storage = FileStorage()
 storage.reload()
