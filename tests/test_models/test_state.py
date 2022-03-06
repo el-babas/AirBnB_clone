@@ -1,18 +1,95 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
-Class definition
+Unittests for State.
 """
+import unittest
+import pycodestyle
+import datetime
+import models
 from models.base_model import BaseModel
 from models.state import State
-import unittest
 
 
-class TestModules(unittest.TestCase):
+class CodeStyleTests(unittest.TestCase):
     """
-    Class definition
+    Code style test.
     """
-    def test_uper(self):
+
+    def testPycodestyle(self):
         """
-        Method definition
+        Tests cases for pycodestyle.
         """
-        self.assertEqual(5, 3)
+        code_style = pycodestyle.StyleGuide(quiet=True)
+        result = code_style.check_files(["models/state.py"])
+        self.assertEqual(result.total_errors, 0, "State pycodestyle error")
+
+
+class DocumentationTests(unittest.TestCase):
+    """
+    Documentation test.
+    """
+
+    def testDocString(self):
+        """
+        Tests cases for docstring.
+        """
+        self.assertIsNotNone(models.state.__doc__,
+                             "State not docstring")
+        self.assertTrue(len(__doc__) > 0, "State not docstring")
+        self.assertFalse(len(__doc__) < 0, "State not docstring")
+
+
+class StateTests(unittest.TestCase):
+    """
+    State tests.
+    """
+    st = State()
+
+    def testAttributes(self):
+        """
+        Test cases for the attributes.
+        """
+        self.st.name = "New State"
+        dict_am = self.st.to_dict()
+
+        self.assertEqual(self.st.name, dict_am["name"])
+        self.assertEqual("State", dict_am["__class__"])
+
+    def testInheritance(self):
+        """
+        Test cases verify is subclass of BaseModel
+        """
+        self.assertIsInstance(self.st, BaseModel)
+        self.assertTrue(hasattr(self.st, 'id'))
+        self.assertTrue(hasattr(self.st, 'created_at'))
+        self.assertTrue(hasattr(self.st, 'updated_at'))
+
+    def testTypeAttributes(self):
+        """
+        Test case for validate type for attributes.
+        """
+        self.assertIsInstance(self.st.name, str)
+        self.assertIsInstance(self.st.id, str)
+        self.assertIsInstance(self.st.created_at, datetime.datetime)
+        self.assertIsInstance(self.st.updated_at, datetime.datetime)
+
+    def testDateUpdate(self):
+        """
+        Test case for validate change update_at.
+        """
+        self.st.name = "Update 1"
+        self.st.save()
+        dict_1 = self.st.to_dict()
+
+        self.st.name = "Update 2"
+        self.st.save()
+        dict_2 = self.st.to_dict()
+
+        self.assertEqual(dict_1["id"], dict_2["id"])
+        self.assertEqual(dict_1["created_at"], dict_2["created_at"])
+        self.assertNotEqual(dict_1["updated_at"], dict_2["updated_at"])
+        self.assertNotEqual(dict_1["name"], dict_2["name"])
+
+
+if __name__ == "__main__":
+    unittest.main()
