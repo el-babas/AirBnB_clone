@@ -4,6 +4,7 @@ Class definition
 """
 from models.base_model import BaseModel
 import unittest
+import datetime
 
 
 class BaseModelTests(unittest.TestCase):
