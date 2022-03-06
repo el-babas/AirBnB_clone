@@ -41,7 +41,7 @@ class DocumentationTests(unittest.TestCase):
 
 class ReviewTests(unittest.TestCase):
     """
-    BaseModel tests.
+    Review tests.
     """
     rw = Review()
 

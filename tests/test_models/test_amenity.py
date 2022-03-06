@@ -41,7 +41,7 @@ class DocumentationTests(unittest.TestCase):
 
 class AmenityTests(unittest.TestCase):
     """
-    BaseModel tests.
+    Amenity tests.
     """
     am = Amenity()
 

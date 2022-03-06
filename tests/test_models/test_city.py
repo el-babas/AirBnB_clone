@@ -41,7 +41,7 @@ class DocumentationTests(unittest.TestCase):
 
 class CityTests(unittest.TestCase):
     """
-    BaseModel tests.
+    City tests.
     """
     ct = City()
 

@@ -41,7 +41,7 @@ class DocumentationTests(unittest.TestCase):
 
 class PlaceTests(unittest.TestCase):
     """
-    BaseModel tests.
+    Place tests.
     """
     pc = Place()
 

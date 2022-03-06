@@ -41,7 +41,7 @@ class DocumentationTests(unittest.TestCase):
 
 class UserTests(unittest.TestCase):
     """
-    BaseModel tests.
+    User tests.
     """
     us = User()
 

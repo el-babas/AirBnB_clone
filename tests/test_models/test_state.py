@@ -41,7 +41,7 @@ class DocumentationTests(unittest.TestCase):
 
 class StateTests(unittest.TestCase):
     """
-    BaseModel tests.
+    State tests.
     """
     st = State()
 
