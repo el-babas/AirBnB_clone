@@ -86,5 +86,5 @@ class FileStorage:
                 for key, values in json.load(file_json).items():
                     class_name = values["__class__"]
                     self.new(class_dict[class_name](**values))
-        except BaseException:
+        except Exception:
             pass
