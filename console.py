@@ -14,57 +14,57 @@ from models.review import Review
 from models import storage
 
 
-class_dict = {
-            "BaseModel": BaseModel,
-            "User": User,
-            "State": State,
-            "City": City,
-            "Amenity": Amenity,
-            "Place": Place,
-            "Review": Review
-        }
-
-
 class HBNBCommand(cmd.Cmd):
     """
     Class:
         HBNBCommand that defines all common attributes/methods
         for other classes.
-    Attributes:
-                 (Por completar)
     """
     prompt = "(hbnb) "
+    class_dict = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review
+    }
 
     def do_EOF(self, args):
         """EOF command to exit the program\n"""
-        print()
-        return(True)
+        print("")
+        return True
 
     def do_quit(self, args):
         """Quit command to exit the program\n"""
-        return(True)
+        return True
 
     def emptyline(self):
-        """No realiza ninguna accion"""
+        """Does not perform any action"""
         pass
+
+    def help_help(self):
+        """ Prints help command description """
+        print("Provides description of a given command")
 
     def do_create(self, args):
         """Creates a new instance of BaseModel\n"""
-        if args == "":
+        if not args:
             print("** class name missing **")
-        elif args not in class_dict.keys():
+        elif args not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
         else:
-            new = class_dict[args]()
-            storage.save()
-            print(new.id)
+            new_model = HBNBCommand.class_dict[args]()
+            print(new_model.id)
+            new_model.save()
 
     def do_show(self, args):
         """Prints the string representation of an instance\n"""
         list_ = args.split()
         if len(list_) == 0:
             print("** class name missing **")
-        elif list_[0] not in class_dict.keys():
+        elif list_[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
         elif len(list_) == 1:
             print("** instance id missing **")
@@ -81,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
         list_ = args.split()
         if len(list_) == 0:
             print("** class name missing **")
-        elif list_[0] not in class_dict.keys():
+        elif list_[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
         elif len(list_) == 1:
             print("** instance id missing **")
@@ -99,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
         list_ = args.split()
         if len(list_) == 0:
             print([str(i) for i in storage.all().values()])
-        elif list_[0] not in class_dict.keys():
+        elif list_[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
         else:
             print([
@@ -114,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
         dict_ = storage.all()
         if len(list_) == 0:
             print("** class name missing **")
-        elif list_[0] not in class_dict.keys():
+        elif list_[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
         elif len(list_) == 1:
             print("** instance id missing **")
