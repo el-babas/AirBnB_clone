@@ -1,17 +1,56 @@
 #!/usr/bin/env python3
 """
-Class definition
+Unittests for BaseModel.
 """
-from models.base_model import BaseModel
 import unittest
+import pycodestyle
+import datetime
+import models
+from models.base_model import BaseModel
 
 
-class TestModules(unittest.TestCase):
+class BaseModelTests(unittest.TestCase):
     """
-    Class definition
+    BaseModel tests.
     """
-    def test_uper(self):
+    bm = BaseModel()
+
+    def testAttributes(self):
         """
-        Method definition
+        Test cases for the attributes.
         """
-        self.assertEqual(5, 3)
+        self.bm.name = "New Base Model"
+        self.bm.my_number = 89
+        self.bm.reason = "Test case"
+        self.bm.save()
+        dict_bm = self.bm.to_dict()
+
+        self.assertEqual(self.bm.id, dict_bm["id"])
+        self.assertEqual(self.bm.reason, dict_bm["reason"])
+        self.assertEqual(self.bm.my_number, dict_bm["my_number"])
+        self.assertEqual(self.bm.reason, dict_bm["reason"])
+        self.assertEqual("BaseModel", dict_bm["__class__"])
+
+    def testTypeAttributes(self):
+        """
+        Test case for validate type for attributes.
+        """
+        self.assertIsInstance(self.bm.id, str)
+        self.assertIsInstance(self.bm.created_at, datetime.datetime)
+        self.assertIsInstance(self.bm.updated_at, datetime.datetime)
+
+    def testDateUpdate(self):
+        """
+        Test case for validate change update_at.
+        """
+        self.bm.changes = "Update 1"
+        self.bm.save()
+        dict_1 = self.bm.to_dict()
+
+        self.bm.changes = "Update 2"
+        self.bm.save()
+        dict_2 = self.bm.to_dict()
+
+        self.assertEqual(dict_1["id"], dict_2["id"])
+        self.assertEqual(dict_1["created_at"], dict_2["created_at"])
+        self.assertNotEqual(dict_1["updated_at"], dict_2["updated_at"])
