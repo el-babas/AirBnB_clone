@@ -56,16 +56,14 @@ class FileStorage:
            Serializes __objects to the JSON file (path: __file_path)
         """
         # info!: [objs_dict] Dictionary contains all dict of the objects
-        objs_dict = dict()
+        objs_dict = self.__objects.copy()
 
         # info!: Serializable objects and Save in Json file
-        if self.__objects is not None and self.__objects:
-            for key, obj in self.__objects.items():
-                objs_dict[key] = obj.to_dict()
-                # note!: Use mode W is correct or A?
-                # note!: changing dump to dumps.
-                with open(self.__file_path, mode="w") as file_json:
-                    file_json.write(json.dumps(objs_dict))
+        for key, obj in self.__objects.items():
+            objs_dict[key] = obj.to_dict()
+        # note!: Use mode W is correct or A?
+        with open(self.__file_path, mode="w") as file_json:
+            file_json.write(json.dumps(objs_dict))
 
     def reload(self):
         """
@@ -76,10 +74,10 @@ class FileStorage:
         class_dict = {
             "BaseModel": BaseModel,
             "User": User,
+            "Place": Place,
             "State": State,
             "City": City,
             "Amenity": Amenity,
-            "Place": Place,
             "Review": Review
         }
         try:
@@ -89,4 +87,4 @@ class FileStorage:
                     class_name = values["__class__"]
                     self.new(class_dict[class_name](**values))
         except BaseException:
-            self.__objects = dict()
+            pass
