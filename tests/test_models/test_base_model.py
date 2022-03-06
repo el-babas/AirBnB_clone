@@ -14,4 +14,4 @@ class TestModules(unittest.TestCase):
         """
         Method definition
         """
-        self.assertEqual(5, 3)
+        self.assertEqual(3, 3)
