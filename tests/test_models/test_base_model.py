@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 Class definition
 """
@@ -10,12 +10,8 @@ class TestModules(unittest.TestCase):
     """
     Class definition
     """
-    def testEquals(self):
+    def test_uper(self):
         """
         Method definition
         """
-        self.assertEqual(3, 3)
-
-
-if __name__ == "__main__":
-    unittest.main()
+        self.assertEqual(5, 3)
