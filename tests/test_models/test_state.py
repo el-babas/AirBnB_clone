@@ -10,35 +10,6 @@ from models.base_model import BaseModel
 from models.state import State
 
 
-class CodeStyleTests(unittest.TestCase):
-    """
-    Code style test.
-    """
-
-    def testPycodestyle(self):
-        """
-        Tests cases for pycodestyle.
-        """
-        code_style = pycodestyle.StyleGuide(quiet=True)
-        result = code_style.check_files(["models/state.py"])
-        self.assertEqual(result.total_errors, 0, "State pycodestyle error")
-
-
-class DocumentationTests(unittest.TestCase):
-    """
-    Documentation test.
-    """
-
-    def testDocString(self):
-        """
-        Tests cases for docstring.
-        """
-        self.assertIsNotNone(models.state.__doc__,
-                             "State not docstring")
-        self.assertTrue(len(__doc__) > 0, "State not docstring")
-        self.assertFalse(len(__doc__) < 0, "State not docstring")
-
-
 class StateTests(unittest.TestCase):
     """
     State tests.
@@ -89,6 +60,33 @@ class StateTests(unittest.TestCase):
         self.assertEqual(dict_1["created_at"], dict_2["created_at"])
         self.assertNotEqual(dict_1["updated_at"], dict_2["updated_at"])
         self.assertNotEqual(dict_1["name"], dict_2["name"])
+
+
+class CodeStyleTests(unittest.TestCase):
+    """
+    Code style test.
+    """
+
+    def testPycodestyle(self):
+        """
+        Tests cases for pycodestyle.
+        """
+        code_style = pycodestyle.StyleGuide(quiet=True)
+        result = code_style.check_files(["models/state.py"])
+        self.assertEqual(result.total_errors, 0, "State pycodestyle error")
+
+
+class DocumentationTests(unittest.TestCase):
+    """
+    Documentation test.
+    """
+
+    def testDocString(self):
+        """
+        Tests cases for docstring.
+        """
+        self.assertIsNotNone(models.state.__doc__,
+                             "State not docstring")
 
 
 if __name__ == "__main__":

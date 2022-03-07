@@ -10,35 +10,6 @@ from models.base_model import BaseModel
 from models.place import Place
 
 
-class CodeStyleTests(unittest.TestCase):
-    """
-    Code style test.
-    """
-
-    def testPycodestyle(self):
-        """
-        Tests cases for pycodestyle.
-        """
-        code_style = pycodestyle.StyleGuide(quiet=True)
-        result = code_style.check_files(["models/place.py"])
-        self.assertEqual(result.total_errors, 0, "Place pycodestyle error")
-
-
-class DocumentationTests(unittest.TestCase):
-    """
-    Documentation test.
-    """
-
-    def testDocString(self):
-        """
-        Tests cases for docstring.
-        """
-        self.assertIsNotNone(models.place.__doc__,
-                             "Place not docstring")
-        self.assertTrue(len(__doc__) > 0, "Place not docstring")
-        self.assertFalse(len(__doc__) < 0, "Place not docstring")
-
-
 class PlaceTests(unittest.TestCase):
     """
     Place tests.
@@ -119,6 +90,33 @@ class PlaceTests(unittest.TestCase):
         self.assertEqual(dict_1["created_at"], dict_2["created_at"])
         self.assertNotEqual(dict_1["updated_at"], dict_2["updated_at"])
         self.assertNotEqual(dict_1["name"], dict_2["name"])
+
+
+class CodeStyleTests(unittest.TestCase):
+    """
+    Code style test.
+    """
+
+    def testPycodestyle(self):
+        """
+        Tests cases for pycodestyle.
+        """
+        code_style = pycodestyle.StyleGuide(quiet=True)
+        result = code_style.check_files(["models/place.py"])
+        self.assertEqual(result.total_errors, 0, "Place pycodestyle error")
+
+
+class DocumentationTests(unittest.TestCase):
+    """
+    Documentation test.
+    """
+
+    def testDocString(self):
+        """
+        Tests cases for docstring.
+        """
+        self.assertIsNotNone(models.place.__doc__,
+                             "Place not docstring")
 
 
 if __name__ == "__main__":
