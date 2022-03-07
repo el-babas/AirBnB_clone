@@ -123,7 +123,6 @@ $
 Please feel free to contact us regarding any matter (specially about mistakes, recomendations and gramar errors)
 
 <p align="center">
-
 Cristhian Apaza -
 <a href="https://github.com/cristhian1107">
         <img src="https://img.shields.io/badge/Cristhian-mainPage-blue">
