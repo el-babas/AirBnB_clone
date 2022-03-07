@@ -30,6 +30,7 @@ class HBNBCommand(cmd.Cmd):
         "Place": Place,
         "Review": Review
     }
+    cmd_list = ['create', 'show', 'update', 'all', 'destroy', 'count']
 
     def do_EOF(self, args):
         """EOF command to exit the program\n"""
@@ -43,6 +44,16 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Does not perform any action"""
         pass
+
+    def precmd(self, args):
+        """parses command input"""
+        if '.' in args and '(' in args and ')' in args:
+            cm_class = args.split('.')
+            cm_action = cm_class[1].split('(')
+            cm_args = cm_action[1].split(')')
+            if cm_class[0] in HBNBCommand.class_dict.keys() and cm_action[0] in HBNBCommand.cmd_list:
+                args = cm_action[0] + ' ' + cm_class[0] + ' ' + cm_args[0]
+        return args
 
     def help_help(self):
         """ Prints help command description """
