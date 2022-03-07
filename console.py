@@ -51,7 +51,8 @@ class HBNBCommand(cmd.Cmd):
             cm_class = args.split('.')
             cm_action = cm_class[1].split('(')
             cm_args = cm_action[1].split(')')
-            if cm_class[0] in HBNBCommand.class_dict.keys() and cm_action[0] in HBNBCommand.cmd_list:
+            if (cm_class[0] in HBNBCommand.class_dict.keys() and
+                    cm_action[0] in HBNBCommand.cmd_list):
                 args = cm_action[0] + ' ' + cm_class[0] + ' ' + cm_args[0]
         return args
 
