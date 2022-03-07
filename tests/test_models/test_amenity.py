@@ -10,35 +10,6 @@ from models.base_model import BaseModel
 from models.amenity import Amenity
 
 
-class CodeStyleTests(unittest.TestCase):
-    """
-    Code style test.
-    """
-
-    def testPycodestyle(self):
-        """
-        Tests cases for pycodestyle.
-        """
-        code_style = pycodestyle.StyleGuide(quiet=True)
-        result = code_style.check_files(["models/amenity.py"])
-        self.assertEqual(result.total_errors, 0, "Amenity pycodestyle error")
-
-
-class DocumentationTests(unittest.TestCase):
-    """
-    Documentation test.
-    """
-
-    def testDocString(self):
-        """
-        Tests cases for docstring.
-        """
-        self.assertIsNotNone(models.amenity.__doc__,
-                             "Amenity not docstring")
-        self.assertTrue(len(__doc__) > 0, "Amenity not docstring")
-        self.assertFalse(len(__doc__) < 0, "Amenity not docstring")
-
-
 class AmenityTests(unittest.TestCase):
     """
     Amenity tests.
@@ -89,6 +60,33 @@ class AmenityTests(unittest.TestCase):
         self.assertEqual(dict_1["created_at"], dict_2["created_at"])
         self.assertNotEqual(dict_1["updated_at"], dict_2["updated_at"])
         self.assertNotEqual(dict_1["name"], dict_2["name"])
+
+
+class CodeStyleTests(unittest.TestCase):
+    """
+    Code style test.
+    """
+
+    def testPycodestyle(self):
+        """
+        Tests cases for pycodestyle.
+        """
+        code_style = pycodestyle.StyleGuide(quiet=True)
+        result = code_style.check_files(["models/amenity.py"])
+        self.assertEqual(result.total_errors, 0, "Amenity pycodestyle error")
+
+
+class DocumentationTests(unittest.TestCase):
+    """
+    Documentation test.
+    """
+
+    def testDocString(self):
+        """
+        Tests cases for docstring.
+        """
+        self.assertIsNotNone(models.amenity.__doc__,
+                             "Amenity not docstring")
 
 
 if __name__ == "__main__":

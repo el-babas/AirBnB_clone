@@ -1,3 +1,4 @@
+
 <h1 align="center" >
 <br>
     <img src="https://assets.website-files.com/6105315644a26f77912a1ada/610540e8b4cd6969794fe673_Holberton_School_logo-04-04.svg" height="50%" width="30%">
@@ -122,6 +123,7 @@ $
 Please feel free to contact us regarding any matter (specially about mistakes, recomendations and gramar errors)
 
 <p align="center">
+
 Cristhian Apaza -
 <a href="https://github.com/cristhian1107">
         <img src="https://img.shields.io/badge/Cristhian-mainPage-blue">
@@ -135,4 +137,5 @@ Jairo Castillo -
 <a href="https://github.com/j4ir0st">
         <img src="https://img.shields.io/badge/Jairo-mainPage-blue">
 </a>
+
 </p>

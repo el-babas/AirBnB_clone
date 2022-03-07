@@ -11,36 +11,6 @@ from models.engine.file_storage import FileStorage
 from models import storage
 
 
-class CodeStyleTests(unittest.TestCase):
-    """
-    Code style test.
-    """
-
-    def testPycodestyle(self):
-        """
-        Tests cases for pycodestyle.
-        """
-        code_style = pycodestyle.StyleGuide(quiet=True)
-        result = code_style.check_files(["models/engine/file_storage.py"])
-        self.assertEqual(result.total_errors, 0,
-                         "FileStorage pycodestyle error")
-
-
-class DocumentationTests(unittest.TestCase):
-    """
-    Documentation test.
-    """
-
-    def testDocString(self):
-        """
-        Tests cases for docstring.
-        """
-        self.assertIsNotNone(models.FileStorage.__doc__,
-                             "FileStorage not docstring")
-        self.assertTrue(len(__doc__) > 0, "FileStorage not docstring")
-        self.assertFalse(len(__doc__) < 0, "FileStorage not docstring")
-
-
 class FileStorageTests(unittest.TestCase):
     """
     FileStorage tests.
@@ -104,6 +74,34 @@ class FileStorageTests(unittest.TestCase):
         storage.reload()
         for key, value in storage.all().items():
             self.assertEqual(objects_dict[key].to_dict(), value.to_dict())
+
+
+class CodeStyleTests(unittest.TestCase):
+    """
+    Code style test.
+    """
+
+    def testPycodestyle(self):
+        """
+        Tests cases for pycodestyle.
+        """
+        code_style = pycodestyle.StyleGuide(quiet=True)
+        result = code_style.check_files(["models/engine/file_storage.py"])
+        self.assertEqual(result.total_errors, 0,
+                         "FileStorage pycodestyle error")
+
+
+class DocumentationTests(unittest.TestCase):
+    """
+    Documentation test.
+    """
+
+    def testDocString(self):
+        """
+        Tests cases for docstring.
+        """
+        self.assertIsNotNone(models.FileStorage.__doc__,
+                             "FileStorage not docstring")
 
 
 if __name__ == "__main__":

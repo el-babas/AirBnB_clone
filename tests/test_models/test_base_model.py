@@ -9,35 +9,6 @@ import models
 from models.base_model import BaseModel
 
 
-class CodeStyleTests(unittest.TestCase):
-    """
-    Code style test.
-    """
-
-    def testPycodestyle(self):
-        """
-        Tests cases for pycodestyle.
-        """
-        code_style = pycodestyle.StyleGuide(quiet=True)
-        result = code_style.check_files(["models/base_model.py"])
-        self.assertEqual(result.total_errors, 0, "BaseModel pycodestyle error")
-
-
-class DocumentationTests(unittest.TestCase):
-    """
-    Documentation test.
-    """
-
-    def testDocString(self):
-        """
-        Tests cases for docstring.
-        """
-        self.assertIsNotNone(models.base_model.__doc__,
-                             "BaseModel not docstring")
-        self.assertTrue(len(__doc__) > 0, "BaseModel not docstring")
-        self.assertFalse(len(__doc__) < 0, "BaseModel not docstring")
-
-
 class BaseModelTests(unittest.TestCase):
     """
     BaseModel tests.
@@ -83,6 +54,33 @@ class BaseModelTests(unittest.TestCase):
         self.assertEqual(dict_1["id"], dict_2["id"])
         self.assertEqual(dict_1["created_at"], dict_2["created_at"])
         self.assertNotEqual(dict_1["updated_at"], dict_2["updated_at"])
+
+
+class CodeStyleTests(unittest.TestCase):
+    """
+    Code style test.
+    """
+
+    def testPycodestyle(self):
+        """
+        Tests cases for pycodestyle.
+        """
+        code_style = pycodestyle.StyleGuide(quiet=True)
+        result = code_style.check_files(["models/base_model.py"])
+        self.assertEqual(result.total_errors, 0, "BaseModel pycodestyle error")
+
+
+class DocumentationTests(unittest.TestCase):
+    """
+    Documentation test.
+    """
+
+    def testDocString(self):
+        """
+        Tests cases for docstring.
+        """
+        self.assertIsNotNone(models.base_model.__doc__,
+                             "BaseModel not docstring")
 
 
 if __name__ == "__main__":
