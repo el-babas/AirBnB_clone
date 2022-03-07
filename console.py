@@ -93,17 +93,15 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """Prints all string representation of all instances\n"""
         tokens = args.split()
-
-        if tokens[0] not in HBNBCommand.class_dict.keys():
+        if len(tokens) == 0:
+            print([str(i) for i in storage.all().values()])
+        elif tokens[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
         else:
-            all_objects = storage.all()
-            list_instances = []
-            for key, obj in all_objects.items():
-                obj_name = obj.__class__.__name__
-                if obj_name == tokens[0]:
-                    list_instances += [obj.__str__()]
-            print(list_instances)
+            print([
+                str(i) for i in storage.all().values()
+                if tokens[0] == i.__class__.__name__
+            ])
 
     def do_update(self, args):
         """Updates an instance by adding or updating its attribute \n"""
