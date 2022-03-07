@@ -50,88 +50,87 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """Creates a new instance of BaseModel\n"""
-        if not args:
+        tokens = args.split()
+        if len(tokens) == 0:
             print("** class name missing **")
-        elif args not in HBNBCommand.class_dict.keys():
+        elif tokens[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
         else:
-            new_model = HBNBCommand.class_dict[args]()
-            print(new_model.id)
+            new_model = HBNBCommand.class_dict[tokens[0]]()
             new_model.save()
+            print(new_model.id)
 
     def do_show(self, args):
         """Prints the string representation of an instance\n"""
-        if not args:
+        tokens = args.split()
+        if len(tokens) == 0:
             print("** class name missing **")
-            return
-
-        l_args = args.split(' ')
-        if l_args[0] not in HBNBCommand.class_dict.keys():
+        elif tokens[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
-        elif len(l_args) == 1:
+        elif len(tokens) == 1:
             print("** instance id missing **")
-        else:
-            object_dict = storage.all()
-            for key, obj in object_dict.items():
-                obj_name = obj.__class__.__name__
-                obj_id = obj.id
-                if obj_name == l_args[0] and obj_id == l_args[1].strip('"'):
-                    print(obj)
-                    return
+        elif (tokens[0] + "." + tokens[1]) not in list(storage.all().keys()):
             print("** no instance found **")
+        else:
+            print(storage.all()[tokens[0] + "." + tokens[1]])
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id\n"""
-        list_ = args.split()
-        if len(list_) == 0:
+        tokens = args.split()
+        if len(tokens) == 0:
             print("** class name missing **")
-        elif list_[0] not in HBNBCommand.class_dict.keys():
+        elif tokens[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
-        elif len(list_) == 1:
+        elif len(tokens) == 1:
             print("** instance id missing **")
+        elif (tokens[0] + "." + tokens[1]) not in list(storage.all().keys()):
+            print("** no instance found **")
         else:
-            list_key = list_[0] + "." + list_[1]
-            dict_ = storage.all()
-            if list_key in dict_.keys():
-                del dict_[list_key]
-                storage.save()
-            else:
-                print("** no instance found **")
+            all_objects = storage.all()
+            del all_objects[tokens[0] + "." + tokens[1]]
+            storage.save()
 
     def do_all(self, args):
         """Prints all string representation of all instances\n"""
-        list_ = args.split()
-        if len(list_) == 0:
-            print([str(i) for i in storage.all().values()])
-        elif list_[0] not in HBNBCommand.class_dict.keys():
+        tokens = args.split()
+
+        if tokens[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
         else:
-            print([
-                str(i) for i in storage.all().values()
-                if list_[0] == i.__class__.__name__
-            ])
+            all_objects = storage.all()
+            list_instances = []
+            for key, obj in all_objects.items():
+                obj_name = obj.__class__.__name__
+                if obj_name == tokens[0]:
+                    list_instances += [obj.__str__()]
+            print(list_instances)
 
     def do_update(self, args):
         """Updates an instance by adding or updating its attribute \n"""
-        list_ = args.split()
-        list_key = list_[0] + "." + list_[1]
-        dict_ = storage.all()
-        if len(list_) == 0:
+        tokens = args.split()
+        if len(tokens) == 0:
             print("** class name missing **")
-        elif list_[0] not in HBNBCommand.class_dict.keys():
+        elif tokens[0] not in HBNBCommand.class_dict.keys():
             print("** class doesn't exist **")
-        elif len(list_) == 1:
+        elif len(tokens) == 1:
             print("** instance id missing **")
-        elif list_key not in dict_.keys():
+        elif (tokens[0] + "." + tokens[1]) not in list(storage.all().keys()):
             print("** no instance found **")
-        elif len(list_) == 2:
+        elif len(tokens) == 2:
             print("** attribute name missing **")
-        elif len(list_) == 3:
+        elif len(tokens) == 3:
             print("** value missing **")
         else:
-            if list_key in dict_.keys():
-                setattr(dict_[list_key], list_[2], list_[3])
-                storage.save()
+            all_objects = storage.all()
+            current_object = all_objects[tokens[0] + "." + tokens[1]]
+            att = tokens[2]
+            val = tokens[3].strip("\"")
+            setattr(
+                current_object,
+                att,
+                val
+            )
+            current_object.save()
 
 
 if __name__ == '__main__':
