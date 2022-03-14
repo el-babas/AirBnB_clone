@@ -7,6 +7,6 @@
     bottom:0;
     position: absolute;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /*Horizontal*/
+    align-items: center; /*Vertical*/
 }
