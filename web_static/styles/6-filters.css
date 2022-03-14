@@ -60,6 +60,7 @@
 	width: 100%;
     padding-top: 20px;
     padding-bottom: 20px;
+    z-index: 100; /* Overlay list */
 }
 
 .filters ul.popover li h2 {
