@@ -5,7 +5,7 @@
     width:100%;
     border-top: 1px solid #CCCCCC;
     bottom:0;
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: center; /*Horizontal*/
     align-items: center; /*Vertical*/
