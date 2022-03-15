@@ -1,7 +1,7 @@
 /* For places style */
 .places {
     display: flex;
-	flex-direction: column;
+    flex-direction: column;
 }
 
 .places h1 {
@@ -11,8 +11,8 @@
 
 .places div {
     display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .places article {
